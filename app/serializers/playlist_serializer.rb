@@ -1,3 +1,7 @@
 class PlaylistSerializer < ActiveModel::Serializer
-  attributes :id, :name, :user_id
+  attributes :id, :name, :user_id, :editable
+
+  def editable
+    scope == object.user
+  end
 end

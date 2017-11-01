@@ -1,5 +1,5 @@
-class PlaylistsController < ApplicationController
-  before_action :set_playlist, only: [:show, :update, :destroy]
+class PlaylistsController < OpenReadController
+  before_action :set_playlist, only: %i[update destroy]
 
   # GET /playlists
   def index
@@ -10,12 +10,12 @@ class PlaylistsController < ApplicationController
 
   # GET /playlists/1
   def show
-    render json: @playlist
+    render json: @playlist.find(params[:id])
   end
 
   # POST /playlists
   def create
-    @playlist = Playlist.new(playlist_params)
+    @playlist = current_user.playlists.build(playlist_params)
 
     if @playlist.save
       render json: @playlist, status: :created, location: @playlist
@@ -27,7 +27,8 @@ class PlaylistsController < ApplicationController
   # PATCH/PUT /playlists/1
   def update
     if @playlist.update(playlist_params)
-      render json: @playlist
+      # render json: @playlist
+      head :no_content
     else
       render json: @playlist.errors, status: :unprocessable_entity
     end
@@ -36,16 +37,19 @@ class PlaylistsController < ApplicationController
   # DELETE /playlists/1
   def destroy
     @playlist.destroy
+
+    head :no_content
   end
 
-  private
     # Use callbacks to share common setup or constraints between actions.
-    def set_playlist
-      @playlist = Playlist.find(params[:id])
-    end
+  def set_playlist
+    @playlist = current_user.playlist.find(params[:id])
+  end
 
     # Only allow a trusted parameter "white list" through.
-    def playlist_params
-      params.require(:playlist).permit(:name, :user_id)
-    end
+  def playlist_params
+    params.require(:playlist).permit(:name, :user_id)
+  end
+
+  # private
 end
