@@ -9,7 +9,7 @@ curl "${API}${URL_PATH}" \
   --header "Content-Type: application/json" \
   --data '{
 	"track": {
-		"name": "'"${NEWNAME}"'",
+		"title": "'"${NEWTITLE}"'",
     "artist": "'"${NEWARTIST}"'",
     "host_url": "'"${NEWURL}"'"
 	}
