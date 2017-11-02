@@ -1,4 +1,4 @@
-#frozen_string_literal: true
+# frozen_string_literal: true
 
 class PlaylistsController < OpenReadController
   before_action :set_playlist, only: %i[update destroy]

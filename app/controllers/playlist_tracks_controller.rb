@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PlaylistTracksController < OpenReadController
   before_action :set_playlist_track, only: %i[show update destroy]
 
@@ -15,7 +17,7 @@ class PlaylistTracksController < OpenReadController
 
   # POST /playlist_tracks
   def create
-    @playlist_track = current_user.playlist_tracks.build(playlist_track_params)
+    @playlist_track = PlaylistTrack.new(playlist_track_params)
 
     if @playlist_track.save
       render json: @playlist_track, status: :created, location: @playlist_track
