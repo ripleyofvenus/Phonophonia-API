@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :tracks
   # resources :playlists, except: %i[new edit]
   resources :examples, except: %i[new edit]
-  resources :playlists, only: %i[index]
+  resources :playlists, except: %i[new edit]
   post '/sign-up' => 'users#signup'
   post '/sign-in' => 'users#signin'
   delete '/sign-out/:id' => 'users#signout'

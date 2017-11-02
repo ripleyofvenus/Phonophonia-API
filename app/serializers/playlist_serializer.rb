@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class PlaylistSerializer < ActiveModel::Serializer
-  attributes :id, :name, :user_id, :editable
+  attributes :id, :name, :editable
 
   def editable
     scope == object.user
