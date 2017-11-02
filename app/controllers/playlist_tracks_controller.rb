@@ -1,5 +1,5 @@
-class PlaylistTracksController < ApplicationController
-  before_action :set_playlist_track, only: [:show, :update, :destroy]
+class PlaylistTracksController < OpenReadController
+  before_action :set_playlist_track, only: %i[show update destroy]
 
   # GET /playlist_tracks
   def index
@@ -10,12 +10,12 @@ class PlaylistTracksController < ApplicationController
 
   # GET /playlist_tracks/1
   def show
-    render json: @playlist_track
+    render json: PlaylistTrack.find(params[:id])
   end
 
   # POST /playlist_tracks
   def create
-    @playlist_track = PlaylistTrack.new(playlist_track_params)
+    @playlist_track = current_user.playlist_tracks.build(playlist_track_params)
 
     if @playlist_track.save
       render json: @playlist_track, status: :created, location: @playlist_track
@@ -38,14 +38,15 @@ class PlaylistTracksController < ApplicationController
     @playlist_track.destroy
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_playlist_track
-      @playlist_track = PlaylistTrack.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_playlist_track
+    @playlist_track = current_user.playlist_tracks.find(params[:id])
+  end
 
-    # Only allow a trusted parameter "white list" through.
-    def playlist_track_params
-      params.require(:playlist_track).permit(:playlist_id, :track_id)
-    end
+  # Only allow a trusted parameter "white list" through.
+  def playlist_track_params
+    params.require(:playlist_track).permit(:playlist_id, :track_id)
+  end
+
+  private :set_playlist_track, :playlist_track_params
 end

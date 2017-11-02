@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TrackSerializer < ActiveModel::Serializer
-  attributes :id, :title, :artist, :host_url
+  attributes :id, :title, :artist, :host_url, :playlists
 end

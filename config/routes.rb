@@ -3,7 +3,6 @@
 Rails.application.routes.draw do
   resources :playlist_tracks, except: %i[new edit]
   resources :tracks, except: %i[new edit]
-  # resources :playlists, except: %i[new edit]
   resources :examples, except: %i[new edit]
   resources :playlists, except: %i[new edit]
   post '/sign-up' => 'users#signup'
