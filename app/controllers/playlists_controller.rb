@@ -20,7 +20,6 @@ class PlaylistsController < OpenReadController
   # POST /playlists.json
   def create
     @playlist = current_user.playlists.build(playlist_params)
-
     if @playlist.save
       render json: @playlist, status: :created
     else
@@ -31,6 +30,7 @@ class PlaylistsController < OpenReadController
   # PATCH/PUT /playlists/1
   def update
     if @playlist.update(playlist_params)
+      @playlist_tracks = @playlist.playlist_tracks.all
       # render json: @playlist
       head :no_content
     else
@@ -52,7 +52,7 @@ class PlaylistsController < OpenReadController
 
   # Only allow a trusted parameter "white list" through.
   def playlist_params
-    params.require(:playlist).permit(:name)
+  params.require(:playlist).permit(:name, :track_ids => [])
   end
 
   private :set_playlist, :playlist_params
