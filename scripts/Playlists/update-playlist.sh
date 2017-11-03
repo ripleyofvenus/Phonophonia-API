@@ -8,9 +8,10 @@ curl "${API}${URL_PATH}" \
   --header "Authorization: Token token=${TOKEN}" \
   --header "Content-Type: application/json" \
   --data '{
-	"playlist": {
-		"name": "'"${NEWNAME}"'"
-	}
+ "playlist": {
+   "name": "The Name",
+      "track_ids": ["8"]
+ }
 }'
 
 echo
