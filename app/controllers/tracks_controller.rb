@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class TracksController < ApplicationController
+class TracksController < OpenReadController
   before_action :set_track, only: %i[show update destroy]
 
   # GET /tracks
@@ -12,15 +12,14 @@ class TracksController < ApplicationController
 
   # GET /tracks/1
   def show
-    render json: @track
+    render json: Track.find(params[:id])
   end
 
   # POST /tracks
   def create
-    @track = Track.new(track_params)
-
+    @track = current_user.tracks.build(track_params)
     if @track.save
-      render json: @track, status: :created, location: @track
+      render json: @track, status: :created
     else
       render json: @track.errors, status: :unprocessable_entity
     end
@@ -29,7 +28,7 @@ class TracksController < ApplicationController
   # PATCH/PUT /tracks/1
   def update
     if @track.update(track_params)
-      render json: @track
+      head :no_content
     else
       render json: @track.errors, status: :unprocessable_entity
     end
@@ -38,16 +37,19 @@ class TracksController < ApplicationController
   # DELETE /tracks/1
   def destroy
     @track.destroy
+
+    head :no_content
   end
 
-  private
     # Use callbacks to share common setup or constraints between actions.
     def set_track
-      @track = Track.find(params[:id])
+      @track = current_user.tracks.find(params[:id])
     end
 
     # Only allow a trusted parameter "white list" through.
     def track_params
       params.require(:track).permit(:title, :artist, :host_url)
     end
+
+  private :set_track, :track_params
 end
