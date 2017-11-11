@@ -41,11 +41,13 @@ ActiveRecord::Schema.define(version: 20171102154339) do
   end
 
   create_table "tracks", force: :cascade do |t|
-    t.text "title"
-    t.text "artist"
+    t.text "title", null: false
+    t.text "artist", null: false
     t.string "host_url", null: false
+    t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_tracks_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -62,4 +64,5 @@ ActiveRecord::Schema.define(version: 20171102154339) do
   add_foreign_key "playlist_tracks", "playlists"
   add_foreign_key "playlist_tracks", "tracks"
   add_foreign_key "playlists", "users"
+  add_foreign_key "tracks", "users"
 end
