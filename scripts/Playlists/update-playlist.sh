@@ -9,8 +9,8 @@ curl "${API}${URL_PATH}" \
   --header "Content-Type: application/json" \
   --data '{
  "playlist": {
-   "name": "The Name",
-      "track_ids": ["8"]
+   "name": "'"${NAME}"'",
+      "track_ids": "'"${IDS}"'"
  }
 }'
 
