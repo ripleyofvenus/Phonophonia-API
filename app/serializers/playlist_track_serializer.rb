@@ -2,6 +2,6 @@
 
 class PlaylistTrackSerializer < ActiveModel::Serializer
   attributes :id
-  has_many :playlist
-  has_many :track
+  belongs_to :playlist
+  belongs_to :track
 end
