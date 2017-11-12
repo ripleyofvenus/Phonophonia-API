@@ -8,6 +8,10 @@ other user's tracks into their own playlists.
 
 API URL:  https://phonophonia.herokuapp.com/
 
+## Screengrab
+
+![Screenshot](https://i.imgur.com/O4w85EB.png)
+
 # Technologies
 - Ruby
 
@@ -17,7 +21,7 @@ our planning process, and more: https://github.com/ripleyofvenus/Phonophonia
 
 # Entity Relationship Diagram
 
-![ERD](https://imgur.com/a/1Igcz)
+![ERD](https://i.imgur.com/u7miQUr.jpg)
 
 
 # Our development process and problem-solving strategy
