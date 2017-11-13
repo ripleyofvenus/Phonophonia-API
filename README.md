@@ -371,5 +371,4 @@ Vary: Origin
 ### Playlists-Tracks
 | Verb   | URI Pattern            | Controller#Action |
 |--------|------------------------|-------------------|
-| POST   | `/playlists-tracks`    | `tracks#create`  |
-| DELETE   | `/playlists-tracks/:id`| `tracks#destroy`  |
+| POST   | `/playlists-tracks`    | `playlists-tracks#create`  |
